@@ -23,7 +23,7 @@ public class AccountsActivity extends AppCompatActivity {
     PieChart pieChart;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {//
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accounts);
         pieChart = (PieChart) findViewById(R.id.piechart);
