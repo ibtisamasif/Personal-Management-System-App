@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.hp.pms_project.ForcastActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="enterAlways"
+            app:title="Groups"
+            app:titleTextColor="#fff" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_weight="1"
+            android:background="#fdeaeaea"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:gravity="center"
+                android:text="NO ACCOUNTS" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_weight="2"
+            android:background="#4455">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btnAddTag"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="#515151"
+                    android:text="ADD TAG"
+                    android:textColor="#fff" />
+
+                <Button
+                    android:id="@+id/btnAddTxn"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="#fe3b95da"
+                    android:text="ADD TXN"
+                    android:textColor="#fff" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

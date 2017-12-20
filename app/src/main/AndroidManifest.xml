@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.hp.pms_project">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".ForcastActivity"
+            android:label="@string/title_activity_forcast"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ReportActivity"
+            android:label="@string/title_activity_report"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AccountsActivity"
+            android:label="@string/title_activity_accounts"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BudgtsActivity"
+            android:label="@string/title_activity_budgts"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RemindersActivity"
+            android:label="@string/title_activity_reminders"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TagsActivity"
+            android:label="@string/title_activity_tags"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GroupsActivity"
+            android:label="GroupsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddTransactionActivity"
+            android:label="@string/title_activity_add_transaction"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddTagsActivity"
+            android:label="@string/title_activity_add_tags"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ContactUsAcivity"
+            android:label="@string/title_activity_contact_us_acivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

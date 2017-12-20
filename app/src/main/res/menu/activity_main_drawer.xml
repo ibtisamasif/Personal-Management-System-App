@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_reports"
+            android:title="Reports" />
+        <item
+            android:id="@+id/nav_forcast"
+            android:title="Forcast" />
+        <item
+            android:id="@+id/nav_budgets"
+            android:title="Budgets" />
+        <item
+            android:id="@+id/nav_accounts"
+            android:title="Accounts" />
+        <item
+            android:id="@+id/nav_reminders"
+            android:title="Reminders" />
+        <item
+        android:id="@+id/nav_tages"
+        android:title="Tag s" />
+        <item
+            android:id="@+id/nav_groups"
+            android:title="Groups" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_contactus"
+                android:title="Contact Us" />
+            <item
+                android:id="@+id/nav_logout"
+
+                android:title="Log out" />
+        </menu>
+    </item>
+
+</menu>
