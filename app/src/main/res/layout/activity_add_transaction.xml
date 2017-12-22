@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#979797"
     android:orientation="vertical"
-    tools:context="com.example.hp.pms_project.ForcastActivity">
+>
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

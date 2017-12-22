@@ -17,7 +17,6 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
-
 public class AccountsActivity extends AppCompatActivity {
 
     PieChart pieChart;
