@@ -73,6 +73,10 @@
         <activity
             android:name=".activities.SelectTagActivity"
             android:label="@string/title_activity_select_tag"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ShowIncomesActivity"
+            android:label="@string/title_activity_show_incomes"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

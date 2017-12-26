@@ -29,4 +29,5 @@
     <string name="title_activity_add_tags">AddTagsActivity</string>
     <string name="title_activity_contact_us_acivity">ContactUsAcivity</string>
     <string name="title_activity_select_tag">SelectTagActivity</string>
+    <string name="title_activity_show_incomes">ShowIncomesActivity</string>
 </resources>

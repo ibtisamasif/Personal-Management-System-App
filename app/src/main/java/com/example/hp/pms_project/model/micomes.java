@@ -1,6 +1,5 @@
 package com.example.hp.pms_project.model;
 
-import java.security.spec.PSSParameterSpec;
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -21,7 +20,7 @@ public class micomes extends RealmObject {
 
     private int tagId;
 
-    private  String tagName;
+    private String tagName;
 
     private String status;
 
