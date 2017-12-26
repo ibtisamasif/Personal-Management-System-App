@@ -1,4 +1,4 @@
-package com.example.hp.pms_project;
+package com.example.hp.pms_project.activities;
 
 
 import android.content.Intent;

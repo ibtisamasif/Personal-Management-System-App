@@ -1,4 +1,4 @@
-package com.example.hp.pms_project;
+package com.example.hp.pms_project.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,49 +10,50 @@ import android.widget.Button;
 
 import com.example.hp.pms_project.R;
 
-public class TagsActivity extends AppCompatActivity {
+public class AddTransactionActivity extends AppCompatActivity {
 
-    private Button btnAddTag;
-    private Button btnAddTxn;
+
+    private Button btnSelectTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tags);
+        setContentView(R.layout.activity_add_transaction);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        btnSelectTag = (Button) findViewById(R.id.btnSelectTag);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        btnAddTag = (Button) findViewById(R.id.btnAddTag);
-        btnAddTxn = (Button) findViewById(R.id.btnAddTxn);
-
-        btnAddTag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), AddTagsActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-        btnAddTxn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
-                startActivity(intent);
-            }
-        });
+        btnSelectTag();
     }
+
+    private void btnSelectTag() {
+
+
+        btnSelectTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(),SelectTagActivity.class);
+                startActivity(intent);
+
+
+
+            }
+        });
+
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            finish(); // close this activity and return to preview activity (if there is any)
         }
         return super.onOptionsItemSelected(item);
     }

@@ -1,4 +1,4 @@
-package com.example.hp.pms_project;
+package com.example.hp.pms_project.activities;
 
 
 import android.content.Intent;
@@ -18,8 +18,7 @@ import android.widget.Button;
 
 import com.example.hp.pms_project.R;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     private Button btnRegister;

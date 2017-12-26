@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
+        android:name=".utils.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,49 +26,53 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".activities.RegisterActivity" />
         <activity
-            android:name=".ForcastActivity"
+            android:name=".activities.ForcastActivity"
             android:label="@string/title_activity_forcast"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ReportActivity"
+            android:name=".activities.ReportActivity"
             android:label="@string/title_activity_report"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AccountsActivity"
+            android:name=".activities.AccountsActivity"
             android:label="@string/title_activity_accounts"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".BudgtsActivity"
+            android:name=".activities.BudgtsActivity"
             android:label="@string/title_activity_budgts"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RemindersActivity"
+            android:name=".activities.RemindersActivity"
             android:label="@string/title_activity_reminders"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TagsActivity"
+            android:name=".activities.TagsActivity"
             android:label="@string/title_activity_tags"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".GroupsActivity"
+            android:name=".activities.GroupsActivity"
             android:label="GroupsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AddTransactionActivity"
+            android:name=".activities.AddTransactionActivity"
             android:label="@string/title_activity_add_transaction"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AddTagsActivity"
+            android:name=".activities.AddTagsActivity"
             android:label="@string/title_activity_add_tags"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ContactUsAcivity"
+            android:name=".activities.ContactUsAcivity"
             android:label="@string/title_activity_contact_us_acivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SelectTagActivity"
+            android:label="@string/title_activity_select_tag"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

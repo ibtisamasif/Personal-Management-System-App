@@ -12,10 +12,52 @@
     android:paddingTop="65dp">
 
 
-    <ScrollView
-        android:id="@+id/login_form"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:weightSum="2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INCOME"
+            android:textColor="#000"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="57,999"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:textColor="#fa367038"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:weightSum="2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EXPENCE"
+            android:textColor="#000"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="57,999"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:textColor="#fa993b3b"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -36,32 +78,47 @@
                     android:layout_height="35dp"
                     android:gravity="center"
                     android:inputType="textEmailAddress"
+                    android:background="#fff"
                     android:singleLine="true"
-                    android:text="WELCOME TO BUXFER" />
+                    android:textColor="#000"
+                    android:text="Transections" />
             </LinearLayout>
 
-
-
-
-            <LinearLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btnRegister"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="#515151"
-                    android:text="ADD TRANSACTION"
-                    android:textColor="#FFF"
-                    android:textStyle="bold" />
-            </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+
+        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnRegister"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="#515151"
+            android:text="ADD TRANSACTION"
+            android:textColor="#FFF"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 </LinearLayout>
