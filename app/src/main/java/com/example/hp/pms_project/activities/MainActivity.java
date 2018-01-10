@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        sessionManager = new SessionManager(MainActivity.this);
+//        sessionManager = new SessionManager(MainActivity.this);/
 //        if (!sessionManager.isSiteSignedIn()) {
 //            startActivity(new Intent(MainActivity.this, LoginActivity.class));
 //            finish();
