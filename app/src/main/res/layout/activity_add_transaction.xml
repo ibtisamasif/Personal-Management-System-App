@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#979797"
-    android:orientation="vertical">
+    android:background="#FFF">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="enterAlways"
-            app:title="Add Transaction"
-            app:titleTextColor="#ffffff" />
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    </android.support.design.widget.AppBarLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="enterAlways"
+                app:title="Add Transaction"
+                app:titleTextColor="#ffffff" />
 
-    <ScrollView
-        android:id="@+id/login_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        </android.support.design.widget.AppBarLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,30 +39,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Type"
-                android:textColor="#fff" />
+                android:textColor="#000" />
 
-            <EditText
+            <Spinner
+                android:id="@+id/spCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:text="Income"/>
+                android:layout_height="45dp"
+                android:layout_marginTop="3dp"
+                android:background="#bdbebebe"
+                android:imeOptions="actionNext"
+                android:paddingLeft="2dp" />
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Discription"
-                android:textColor="#fff" />
+                android:text="Description"
+                android:textColor="#000" />
 
             <EditText
                 android:id="@+id/etDescription"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginTop="3dp"
+                android:background="#bdbebebe"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 ,.?%$"
                 android:ems="10"
                 android:hint="Enter description"
-                android:inputType="textPersonName"
-                android:textColor="#fff" />
+                android:inputType="textImeMultiLine"
+                android:paddingLeft="10dp"
+                android:textColor="#000" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -80,14 +86,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Date"
-                        android:textColor="#fff" />
+                        android:textColor="#000" />
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/etDatePicker"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:background="#fff"
-                        android:id="@+id/et"/>
+                        android:layout_height="45dp"
+                        android:layout_gravity="bottom"
+                        android:layout_margin="1dp"
+                        android:background="#bdbebebe"
+                        android:hint="Choose date"
+                        android:paddingLeft="10dp"
+                        android:textColor="#000"
+                        android:textSize="15dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -100,34 +111,51 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Amount"
-                        android:textColor="#fff" />
+                        android:textColor="#000" />
 
                     <EditText
-                        android:id="@+id/editText2"
+                        android:id="@+id/etAmount"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
+                        android:layout_margin="1dp"
                         android:layout_marginTop="3dp"
-                        android:background="#fff"
+                        android:background="#bdbebebe"
+                        android:digits="1234567890"
                         android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="enter amount"
-                        android:textColor="#fff" />
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:text="0"
+                        android:textColor="#000" />
                 </LinearLayout>
             </LinearLayout>
 
 
             <TextView
+                android:id="@+id/tvCreateTags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tages"
-                android:textColor="#fff" />
+                android:text="Create Tags"
+                android:textColor="#0a27e4"
+                android:textSize="21dp"
+                android:textStyle="bold" />
 
-         <Button
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text="Please select your tag"
-             android:id="@+id/btnSelectTag"
-             android:textColor="#fff"/>
+            <Spinner
+                android:id="@+id/spTags"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="3dp"
+                android:background="#bdbebebe"
+                android:imeOptions="actionNext"
+                android:paddingLeft="2dp" />
+
+            <!--<EditText-->
+            <!--android:id="@+id/etTagName"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:background="#bdbebebe"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:hint="Please enter your tag"-->
+            <!--android:textColor="#000" />-->
 
             <TextView
                 android:id="@+id/textView2"
@@ -135,19 +163,43 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginTop="3dp"
+
                 android:gravity="left"
                 android:text="More Options"
-                android:textColor="#fff" />
+                android:textColor="#000" />
+
+
+            <EditText
+                android:id="@+id/etStatus"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#bdbebebe"
+                android:hint="Status"
+                android:paddingLeft="10dp"
+                android:textColor="#000" />
+
+            <EditText
+                android:id="@+id/etMemo"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:background="#bdbebebe"
+                android:hint="Memo"
+                android:paddingLeft="10dp"
+                android:textColor="#000" />
+
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnSaveTransaction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:background="#515151"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_xml_btn_yellow"
+                android:shadowColor="@color/cardview_dark_background"
                 android:text="Save Transection"
                 android:textColor="#fff" />
 
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

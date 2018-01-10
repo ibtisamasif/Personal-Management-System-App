@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1122"
@@ -12,8 +11,6 @@
     android:weightSum="1"
 
     >
-
-
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
@@ -24,6 +21,7 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
             android:layout_weight="1"
             android:orientation="vertical"
             android:weightSum="5">
@@ -37,14 +35,15 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/etEmail"
+                    android:id="@+id/etmail"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:background="#FFF"
-                    android:hint=" Email"
-                    android:text="touqeer@gmail.com"
+                    android:hint="Email"
+                    android:paddingLeft="10dp"
                     android:inputType="textEmailAddress"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:text="Outstarttech@gmail.com" />
             </LinearLayout>
 
             <LinearLayout
@@ -60,10 +59,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:background="#FFF"
-                    android:hint=" Password"
-                    android:text="bcs02133176"
+                    android:hint="Password"
+                    android:paddingLeft="10dp"
                     android:inputType="textPassword"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:text="bcs02133176" />
             </LinearLayout>
 
 
@@ -81,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:background="#515151"
+                    android:background="@drawable/selector_xml_btn_yellow"
                     android:text="Log In"
                     android:textColor="#FFF"
                     android:textStyle="bold" />
@@ -96,13 +96,16 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="Forgot password ?"
                     android:textColor="#505154" />
+
             </LinearLayout>
 
 
@@ -110,20 +113,33 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnRegister"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="#515151"
-                    android:text="Register"
-                    android:textColor="#FFF"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Not a member ?"
+                    android:textColor="#032ca4" />
+
+                <TextView
+                    android:id="@+id/btnRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Sign up"
+                    android:textColor="#032ca4"
                     android:textStyle="bold" />
+
+
             </LinearLayout>
 
         </LinearLayout>

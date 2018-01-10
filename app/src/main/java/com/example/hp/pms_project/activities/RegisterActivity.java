@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.hp.pms_project.R;
-import com.example.hp.pms_project.activities.LoginActivity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         etUserName = (EditText) findViewById(R.id.etUserName);
-        etEmail = (EditText) findViewById(R.id.etEmail);
+        etEmail = (EditText) findViewById(R.id.etmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         etConfPassword = (EditText) findViewById(R.id.etConfPassword);
         btnRegister = (Button) findViewById(R.id.btnRegister);

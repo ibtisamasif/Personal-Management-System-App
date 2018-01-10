@@ -1,7 +1,5 @@
 package com.example.hp.pms_project.model;
 
-import java.util.Date;
-
 import io.realm.RealmObject;
 
 /**
@@ -11,21 +9,29 @@ import io.realm.RealmObject;
 public class micomes extends RealmObject {
 
     private int id;
-
+    private String type;
     private String desc;
 
-    private int amount;
+//    private int amount;
+//
+//    private String eDate;
+//
+//    private int tagId;
+//
+//
+//    private String tagName;
+//
+//    private String status;
+//
+//    private String createdAt;
 
-    private Date eDate;
+    public String getType() {
+        return type;
+    }
 
-    private int tagId;
-
-    private String tagName;
-
-    private String status;
-
-    private Date createdAt;
-
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getId() {
         return id;
@@ -43,53 +49,53 @@ public class micomes extends RealmObject {
         this.desc = desc;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public Date geteDate() {
-        return eDate;
-    }
-
-    public void seteDate(Date eDate) {
-        this.eDate = eDate;
-    }
-
-    public int getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(int tagId) {
-        this.tagId = tagId;
-    }
-
-    public String getTagName() {
-        return tagName;
-    }
-
-    public void setTagName(String tagName) {
-        this.tagName = tagName;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+//    public int getAmount() {
+//        return amount;
+//    }
+//
+//    public void setAmount(int amount) {
+//        this.amount = amount;
+//    }
+//
+//    public String geteDate() {
+//        return eDate;
+//    }
+//
+//    public void seteDate(String eDate) {
+//        this.eDate = eDate;
+//    }
+//
+//    public int getTagId() {
+//        return tagId;
+//    }
+//
+//    public void setTagId(int tagId) {
+//        this.tagId = tagId;
+//    }
+//
+//    public String getTagName() {
+//        return tagName;
+//    }
+//
+//    public void setTagName(String tagName) {
+//        this.tagName = tagName;
+//    }
+//
+//    public String getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
+//
+//    public String getCreatedAt() {
+//        return createdAt;
+//    }
+//
+//    public void setCreatedAt(String createdAt) {
+//        this.createdAt = createdAt;
+//    }
 
 
 }

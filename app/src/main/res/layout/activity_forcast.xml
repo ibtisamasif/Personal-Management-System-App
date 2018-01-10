@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
->
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -15,14 +14,13 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            app:titleTextColor="#ffffff"
-            app:title="FORCAST"
             android:layout_height="?attr/actionBarSize"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="enterAlways" />
+            app:layout_scrollFlags="enterAlways"
+            app:title="FORCAST"
+            app:titleTextColor="#ffffff" />
 
     </android.support.design.widget.AppBarLayout>
-
 
 
 </LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_all_tags"
+        android:title="All Transaction"
+        android:icon="@drawable/tran"
+       />
+    <item
+        android:id="@+id/nav_graphs"
+        android:title="All graphs"
+        android:icon="@drawable/piechart"/>
+    <item
+        android:id="@+id/nav_report"
+        android:icon="@drawable/reports"
+        android:title="Reports" />
+    <item
+        android:id="@+id/nav_add_tag"
+        android:title="Add Tag"
+        android:icon="@drawable/price"
+        />
+    <item
+        android:id="@+id/nav_select_tag_total"
+        android:title="Select Tags "
+        android:icon="@drawable/price"
+        />
+
+    <item
+        android:id="@+id/nav_contact"
+        android:title="Contact Us"
+        android:icon="@drawable/contactus"
+        />
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/close"
+        android:title="Logout" />
+</menu>

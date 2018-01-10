@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.SplashScreenActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,14 +25,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.MainActivity"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.NavigationDrawerActivity" />
         <activity
             android:name=".activities.ForcastActivity"
             android:label="@string/title_activity_forcast"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ReportActivity"
@@ -61,6 +62,7 @@
         <activity
             android:name=".activities.AddTransactionActivity"
             android:label="@string/title_activity_add_transaction"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.AddTagsActivity"
@@ -77,7 +79,18 @@
         <activity
             android:name=".activities.ShowIncomesActivity"
             android:label="@string/title_activity_show_incomes"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- <activity -->
+        <!-- android:name=".activities.Main2Activity" -->
+        <!-- android:label="@string/title_activity_main2" -->
+        <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
+        <activity
+            android:name=".activities.ShowAllTagsActivity"
+            android:label="@string/title_activity_show_all_tags"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.AllGraphsActivity" />
+        <!-- <activity android:name=".SplashScreenActivity"></activity> -->
+        <activity android:name=".activities.SelectTagsTotalActivity"></activity>
     </application>
 
 </manifest>

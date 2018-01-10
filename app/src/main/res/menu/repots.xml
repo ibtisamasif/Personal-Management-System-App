@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_aDayAgo"
+        android:orderInCategory="100"
+        android:title="A day ago"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_lastWeek"
+        android:orderInCategory="100"
+        android:title="Last week"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_days15Ago"
+        android:orderInCategory="100"
+        android:title="Last 15 days ago"
+        app:showAsAction="never" />
+</menu>

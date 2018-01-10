@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <!--<EditText-->
+    <!--android:id="@+id/etType"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="@dimen/activity_horizontal_margin"-->
+    <!--android:hint="Type"-->
+    <!--android:inputType="text" />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Type"/>
+
+
+    <Spinner
+        android:id="@+id/spCategory"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="3dp"
+        android:paddingLeft="2dp"
+        android:background="#bdbebebe"
+        android:imeOptions="actionNext" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Description"/>
+
+    <EditText
+        android:id="@+id/etDes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:gravity="left"
+        android:paddingLeft="10dp"
+        android:inputType="text" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+
+        android:text="Amount"/>
+    <EditText
+        android:id="@+id/etAm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Amount"
+        android:paddingLeft="10dp"
+        android:digits="1234567890"
+        android:gravity="left"
+        android:inputType="textVisiblePassword" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+
+        android:text="Tag name"/>
+    <EditText
+        android:id="@+id/etTagNa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:gravity="left"
+        android:hint="Tag name"
+        android:inputType="text" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+
+        android:layout_height="wrap_content"
+        android:text="Status"/>
+    <EditText
+        android:id="@+id/etstatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:hint="status"
+        android:gravity="left"
+        android:inputType="text" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+
+        android:text="Memo"/>
+    <EditText
+        android:id="@+id/etmemo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:gravity="left"
+        android:hint="Memo"
+        android:inputType="text" />
+</LinearLayout>

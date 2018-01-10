@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.hp.pms_project.R;
 
@@ -17,7 +18,6 @@ import java.util.regex.Pattern;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity {
-
     // UI references.
     private EditText etEmail;
     private EditText etPassword;
@@ -27,10 +27,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        etEmail = findViewById(R.id.etEmail);
+        etEmail = (EditText) findViewById(R.id.etmail);
         etPassword = findViewById(R.id.etPassword);
         Button btnLogin = findViewById(R.id.btnLogin);
-        Button btnRegister = findViewById(R.id.btnRegister);
+        TextView tvRegister = findViewById(R.id.btnRegister);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,14 +51,15 @@ public class LoginActivity extends AppCompatActivity {
                 if (isValidEmail(email) && isValidPassword(pass)) {
                     // Validation Completed
 
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
                     startActivity(intent);
+                    finish();
                 }
 
 
             }
         });
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
