@@ -33,7 +33,7 @@ public class ReportActivity extends AppCompatActivity {
     private TextView tvTotalExpance;
     private Button btnLastWeek;
     private Button btnLast15Days;
-    private Button btnMonth;
+    private PieChart pieChart;
     private long sum;
     private long sumBudget;
     private long sumExpance;
@@ -42,7 +42,6 @@ public class ReportActivity extends AppCompatActivity {
     float sum1 = 0;
     long lnAmountIncome;
     boolean check = false;
-    private PieChart pieChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +53,6 @@ public class ReportActivity extends AppCompatActivity {
         btnLastWeek = (Button) findViewById(R.id.btnLastWeek);
         btnLast15Days = (Button) findViewById(R.id.btnLast15Days);
         pieChart = (PieChart) findViewById(R.id.piechart);
-
-//        btnMonth = (Button) findViewById(R.id.btnMonth);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -92,8 +89,6 @@ public class ReportActivity extends AppCompatActivity {
         long lastWeek = cuurentTime - 604800000;
         long cuurentTime15 = System.currentTimeMillis();
         long last15DAys = cuurentTime15 - 1296000000;
-//        long cuurentTime30 = System.currentTimeMillis();
-//        long lastMonth = cuurentTime30 - 2629743833;
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<transactionTable> query = realm.where(transactionTable.class);
         query.equalTo("type", "Income");
@@ -133,9 +128,9 @@ public class ReportActivity extends AppCompatActivity {
         sum1 = 0;
         Toast.makeText(this, "" + sum + "  " + sumBudget + "  " + sumExpance + " f " + f, Toast.LENGTH_SHORT).show();
         ArrayList<PieEntry> yValues = new ArrayList<>();
-        sum1 = f1 - f2;
+        sum1 = f - f2;
         yValues.add(new PieEntry(f2, "Expense"));
-        yValues.add(new PieEntry(sum1, "Budget Remaining"));
+        yValues.add(new PieEntry(sum1, "Income Remaining"));
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
         PieDataSet dataSet = new PieDataSet(yValues, "Status");
         dataSet.setSliceSpace(3f);
@@ -151,12 +146,8 @@ public class ReportActivity extends AppCompatActivity {
         sum = 0;
         sumBudget = 0;
         sumExpance = 0;
-//      long cuurentTime = System.currentTimeMillis();
-//      long lastWeek = cuurentTime - 604800000;
         long cuurentTime15 = System.currentTimeMillis();
         long last15DAys = cuurentTime15 - 1296000000;
-//      long cuurentTime30 = System.currentTimeMillis();
-//      long lastMonth = cuurentTime30 - 2629743833;
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<transactionTable> query = realm.where(transactionTable.class);
         query.equalTo("type", "Income");
@@ -194,9 +185,9 @@ public class ReportActivity extends AppCompatActivity {
         sum1 = 0;
         Toast.makeText(this, "" + sum + "  " + sumBudget + "  " + sumExpance + " f " + f, Toast.LENGTH_SHORT).show();
         ArrayList<PieEntry> yValues = new ArrayList<>();
-        sum1 = f1 - f2;
+        sum1 = f - f2;
         yValues.add(new PieEntry(f2, "Expense"));
-        yValues.add(new PieEntry(sum1, "Budget Remaining"));
+        yValues.add(new PieEntry(sum1, "Income Remaining"));
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
         PieDataSet dataSet = new PieDataSet(yValues, "Status");
         dataSet.setSliceSpace(3f);

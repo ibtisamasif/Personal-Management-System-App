@@ -128,22 +128,16 @@
                         android:textColor="#000" />
                 </LinearLayout>
             </LinearLayout>
-
-
             <TextView
-                android:id="@+id/tvCreateTags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Create Tags"
-                android:textColor="#0a27e4"
-                android:textSize="21dp"
-                android:textStyle="bold" />
-
+                android:text="Tags"
+                android:textColor="#000"/>
             <Spinner
                 android:id="@+id/spTags"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="10dp"
                 android:background="#bdbebebe"
                 android:imeOptions="actionNext"
                 android:paddingLeft="2dp" />
@@ -188,12 +182,22 @@
                 android:paddingLeft="10dp"
                 android:textColor="#000" />
 
+            <Button
+                android:id="@+id/btnCreateTags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CREATE TAG"
+                android:inputType="text"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_xml_btn_yellow"
+                android:textColor="#FFF"
 
+                />
             <Button
                 android:id="@+id/btnSaveTransaction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/selector_xml_btn_yellow"
                 android:shadowColor="@color/cardview_dark_background"
                 android:text="Save Transection"

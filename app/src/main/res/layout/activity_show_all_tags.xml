@@ -35,51 +35,51 @@
         android:orientation="horizontal"
         android:weightSum="5">
 
+        <!--<Button-->
+            <!--android:id="@+id/btnTran"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="1dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/selector_xml_btn_yellow"-->
+            <!--android:gravity="center"-->
+            <!--android:text="Add Transaction"-->
+            <!--android:textColor="#fff" />-->
+
         <Button
-            android:id="@+id/btnAll"
+
+            android:id="@+id/btnIncome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:background="@drawable/selector_xml_btn_yellow"
             android:gravity="center"
-            android:text="All"
+            android:text="Income"
             android:textColor="#fff" />
 
-        <!--<Button-->
-
-            <!--android:id="@+id/btnIncome"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="1dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="#405594"-->
-            <!--android:gravity="center"-->
-            <!--android:text="Income"-->
-            <!--android:textColor="#fff" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/btnBudget"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="1dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="#405594"-->
-            <!--android:gravity="center"-->
-            <!--android:text="Budget"-->
-            <!--android:textColor="#fff" />-->
+        <Button
+            android:id="@+id/btnBudget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_xml_btn_yellow"
+            android:gravity="center"
+            android:text="Budget"
+            android:textColor="#fff" />
 
 
-        <!--<Button-->
-            <!--android:id="@+id/btnExpense"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="1dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="#405594"-->
-            <!--android:gravity="center"-->
-            <!--android:text="Expense"-->
-            <!--android:textColor="#fff" />-->
+        <Button
+            android:id="@+id/btnExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_xml_btn_yellow"
+            android:gravity="center"
+            android:text="Expense"
+            android:textColor="#fff" />
 
 
         <!--<Button-->

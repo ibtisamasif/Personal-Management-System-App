@@ -1,5 +1,6 @@
 package com.example.hp.pms_project.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -28,6 +29,7 @@ public class AddTagsActivity extends AppCompatActivity {
 
     private EditText etAddTag;
     private Button btnSaveTag;
+    private Button btnAddTran;
     private RecyclerView recycler;
     private Realm realm;
     private TagsAdapter adapter;
@@ -37,9 +39,10 @@ public class AddTagsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tags);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        recycler = (RecyclerView) findViewById(R.id.recycler);
         etAddTag = (EditText) findViewById(R.id.etAddTag);
         btnSaveTag = (Button) findViewById(R.id.btnSaveTag);
+        btnAddTran = (Button) findViewById(R.id.btnAddTran);
+        recycler = (RecyclerView) findViewById(R.id.recycler);
         setSupportActionBar(toolbar);
         this.realm = RealmController.with(this).getRealm();
         setupRecycler();
@@ -50,6 +53,10 @@ public class AddTagsActivity extends AppCompatActivity {
         // refresh the realm instance
         RealmController.with(this).refresh();
         setRealmAdapter(RealmController.with(this).getTransactionsTags());
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         btnSaveTag.setOnClickListener(new View.OnClickListener() {
 
@@ -61,32 +68,28 @@ public class AddTagsActivity extends AppCompatActivity {
                     public void execute(Realm bgRealm) {
                         addTags add = bgRealm.createObject(addTags.class);
                         add.setId(System.currentTimeMillis());
-                        add.setTagName(etAddTag.getText().toString());
+                        add.setTagName(etAddTag.getText().toString().toLowerCase());
                     }
                 });
                 Log.d("AddTagsActivity", "onCreate: " + realm.where(addTags.class).findAll());
                 realm.close();
                 btnSaveTag.setVisibility(View.GONE);
-                finish();
+                //finish();
 
+
+            }
+        });
+        btnAddTran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
+                startActivity(intent);
 
             }
         });
 
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // handle arrow click here
-        if (item.getItemId() == android.R.id.home) {
-            finish(); // close this activity and return to preview activity (if there is any)
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void setRealmAdapter(RealmResults<addTags> add) {
@@ -114,13 +117,6 @@ public class AddTagsActivity extends AppCompatActivity {
         setRealmAdapter(RealmController.with(this).getSortTags());
     }
 
-    //    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == android.R.id.home) {
-//            finish();
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
     private void setRealmData() {
         ArrayList<addTags> addTags = new ArrayList<>();
         for (addTags t : addTags) {
@@ -130,6 +126,15 @@ public class AddTagsActivity extends AppCompatActivity {
             realm.commitTransaction();
         }
         Prefs.with(this).setPreLoad(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

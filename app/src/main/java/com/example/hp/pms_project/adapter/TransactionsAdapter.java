@@ -65,16 +65,10 @@ public class TransactionsAdapter extends RealmRecyclerViewAdapter<transactionTab
         holder.tvIncomeDes.setText(transactionsTable.getDescription());
         holder.tvIncomeDate.setText(DateAndTimeUtils.getDateTimeStringFromMiliseconds(transactionsTable.getDate(), "MMM dd,yyyy hh:mm:ss a"));
         holder.tvIncomeAmount.setText(transactionsTable.getAmount() + "");
-        holder.tvIncomeTagId.setText(transactionsTable.getTagId() + "");
         holder.tvIncomeTagName.setText(transactionsTable.getTagName());
-        holder.tvIncomeStatus.setText(transactionsTable.getStatus());
-        holder.tvIncomeMemo.setText(transactionsTable.getMemo());
-        //remove single match from realm
         holder.card.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
-
                 new AlertDialog.Builder(context)
                         .setTitle("Delete")
                         .setMessage("Do you want to delete?")
@@ -95,7 +89,6 @@ public class TransactionsAdapter extends RealmRecyclerViewAdapter<transactionTab
                                     Prefs.with(context).setPreLoad(false);
                                 }
                                 notifyDataSetChanged();
-                                //  realm.close();
 
                                 Toast.makeText(context, title + " is removed from Realm", Toast.LENGTH_SHORT).show();
 
@@ -121,14 +114,11 @@ public class TransactionsAdapter extends RealmRecyclerViewAdapter<transactionTab
                 String check = transactionsTable.getType();
 
                 if (check.equals("Income")) {
-                    Log.d("", "onClick: Income type  " + transactionsTable.getType());
                     category.clear();
-
                     Log.d("", "onClick: " + category);
                     category.add("Income");
                     category.add("Expense");
                     category.add("Budget");
-                    Log.d("", "onClick: _______________________Income_________________" + category);
 
                 }
                 if (check.equals("Expense")) {
@@ -136,7 +126,7 @@ public class TransactionsAdapter extends RealmRecyclerViewAdapter<transactionTab
                     category.add("Expense");
                     category.add("Income");
                     category.add("Budget");
-                    Log.d("", "onClick: _______________________Expense_________________" + category);
+
 
                 }
                 if (check.equals("Budget")) {
@@ -144,7 +134,7 @@ public class TransactionsAdapter extends RealmRecyclerViewAdapter<transactionTab
                     category.add("Budget");
                     category.add("Income");
                     category.add("Expense");
-                    Log.d("", "onClick: _______________________Budget_________________" + category);
+
 
                 }
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, category);
@@ -154,7 +144,6 @@ public class TransactionsAdapter extends RealmRecyclerViewAdapter<transactionTab
                     @Override
                     public void onItemSelected(AdapterView<?> arg0, View view, int arg2, long arg3) {
                         showCategory = String.valueOf(spCategory.getSelectedItem());
-                        //Toast.makeText(getApplicationContext(), showCategory, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -163,13 +152,11 @@ public class TransactionsAdapter extends RealmRecyclerViewAdapter<transactionTab
 
                     }
                 });
-                //final EditText etType = (EditText) content.findViewById(R.id.etType);
                 final EditText etDes = (EditText) content.findViewById(R.id.etDes);
                 final EditText etAm = (EditText) content.findViewById(R.id.etAm);
                 final EditText etTagNa = (EditText) content.findViewById(R.id.etTagNa);
                 final EditText etstatus = (EditText) content.findViewById(R.id.etstatus);
                 final EditText etmemo = (EditText) content.findViewById(R.id.etmemo);
-                //etType.setText(transactionsTable.getType());
                 etDes.setText(transactionsTable.getDescription() + "");
                 etAm.setText(transactionsTable.getAmount() + "");
                 etTagNa.setText(transactionsTable.getTagName());
@@ -191,7 +178,7 @@ public class TransactionsAdapter extends RealmRecyclerViewAdapter<transactionTab
                                 results.get(position).setMemo(etmemo.getText().toString());
                                 realm.commitTransaction();
                                 notifyDataSetChanged();
-                                // realm.close();
+
 
                             }
                         })
@@ -204,7 +191,7 @@ public class TransactionsAdapter extends RealmRecyclerViewAdapter<transactionTab
                         });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-                //realm.close();
+
             }
         });
     }
@@ -225,10 +212,7 @@ public class TransactionsAdapter extends RealmRecyclerViewAdapter<transactionTab
         public TextView tvIncomeDate;
         public TextView tvIncomeDes;
         public TextView tvIncomeAmount;
-        public TextView tvIncomeTagId;
         public TextView tvIncomeTagName;
-        public TextView tvIncomeStatus;
-        public TextView tvIncomeMemo;
         public TextView tvIncomeType;
 
         public CardViewHolder(View itemView) {
@@ -239,10 +223,7 @@ public class TransactionsAdapter extends RealmRecyclerViewAdapter<transactionTab
             tvIncomeDes = (TextView) itemView.findViewById(R.id.tvIncomeDes);
             tvIncomeDate = (TextView) itemView.findViewById(R.id.tvIncomeDate);
             tvIncomeAmount = (TextView) itemView.findViewById(R.id.tvIncomeAmount);
-            tvIncomeTagId = (TextView) itemView.findViewById(R.id.tvIncomeTagId);
             tvIncomeTagName = (TextView) itemView.findViewById(R.id.tvIncomeTagName);
-            tvIncomeStatus = (TextView) itemView.findViewById(R.id.tvIncomeStatus);
-            tvIncomeMemo = (TextView) itemView.findViewById(R.id.tvIncomeMemo);
 
 
         }

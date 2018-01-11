@@ -78,12 +78,14 @@ public class RealmController {
         return realm.where(transactionTable.class).findAll();
         //return realm.where(transactionTable.class).equalTo("type","Income").findAll();
     }
+
     //String tagName
     public RealmResults<transactionTable> getTransactionsTages(String tagName) {
 
-        return realm.where(transactionTable.class).equalTo("tagName",tagName).findAll();
+        return realm.where(transactionTable.class).equalTo("tagName", tagName).findAll();
         //return realm.where(transactionTable.class).equalTo("type","Income").findAll();
     }
+
     public RealmResults<addTags> getTransactionsTags() {
 
         return realm.where(addTags.class).findAll();
@@ -114,27 +116,30 @@ public class RealmController {
         return realm.where(transactionTable.class).greaterThan("date", ADayAgo).findAll();
         //return realm.where(transactionTable.class).equalTo("type","Income").findAll();
     }
+
     public RealmResults<transactionTable> getTransactionsLast15Day() {
         long cuurentTime = System.currentTimeMillis();
         long Last15Days = cuurentTime - 1296000000;
         return realm.where(transactionTable.class).greaterThan("date", Last15Days).findAll();
         //return realm.where(transactionTable.class).equalTo("type","Income").findAll();
     }
+
     public RealmResults<transactionTable> getTransactionsLastWeek() {
         long cuurentTime = System.currentTimeMillis();
         long LastWeek = cuurentTime - 604800000;
         return realm.where(transactionTable.class).greaterThan("date", LastWeek).findAll();
         //return realm.where(transactionTable.class).equalTo("type","Income").findAll();
     }
+
     public RealmResults<transactionTable> getSort() {
         RealmResults<transactionTable> results = realm.where(transactionTable.class).findAllSorted("id", false);
         return results;
     }
+
     public RealmResults<addTags> getSortTags() {
         RealmResults<addTags> results = realm.where(addTags.class).findAllSorted("id", false);
         return results;
     }
-
 
 
     //query a single item with the given id

@@ -83,6 +83,7 @@ public class TagsActivity extends AppCompatActivity {
         adapter.setRealmAdapter(realmAdapter);
         adapter.notifyDataSetChanged();
     }
+
     private void setupRecycler() {
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -95,7 +96,6 @@ public class TagsActivity extends AppCompatActivity {
         // create an empty adapter and add it to the recycler view
         adapter = new TagsAdapter(this);
         recycler.setAdapter(adapter);
-
         RealmController.with(this).refresh();
         setRealmAdapter(RealmController.with(this).getSortTags());
     }
@@ -107,6 +107,7 @@ public class TagsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void setRealmData() {
         ArrayList<addTags> addTags = new ArrayList<>();
         for (addTags t : addTags) {

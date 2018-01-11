@@ -21,7 +21,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="enterAlways"
-                app:title="Add Transaction"
+                app:title="SELECT TAG"
                 app:titleTextColor="#ffffff" />
 
         </android.support.design.widget.AppBarLayout>
@@ -35,7 +35,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Tage and see sum"
+                android:text="Select Tag"
+                android:textStyle="bold"
+                android:textSize="17dp"
                 android:textColor="#000" />
 
             <Spinner
@@ -46,10 +48,47 @@
                 android:background="#bdbebebe"
                 android:imeOptions="actionNext"
                 android:paddingLeft="2dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="4dp"
+                android:background="#d6d6d6" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp"
+                android:weightSum="2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:text="Sum of selected tags :"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:textSize="17dp"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:id="@+id/tvSumTags"
+                    android:text="Sums"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="4dp"
+                android:background="#d6d6d6" />
 
             <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/recycler"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="414dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />

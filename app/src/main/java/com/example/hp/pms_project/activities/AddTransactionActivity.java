@@ -191,33 +191,31 @@ public class AddTransactionActivity extends AppCompatActivity {
     private TextView etDatePicker;
     private EditText etDescription;
     private EditText etAmount;
-    private EditText etTagName;
     private EditText etStatus;
     private EditText etMemo;
     private Spinner spCategory;
     private Spinner spTags;
+    private Button btnCreateTags;
     private Button btnSaveTransaction;
-    Calendar dateTime = Calendar.getInstance();
-    DateFormat formatDateTime = DateFormat.getDateTimeInstance();
     public ArrayList<String> category;
     public ArrayList<String> tagsCategory;
     private String showCategory;
     private String addTagsToTransactionTable;
-    private TextView tvCreateTags;
+    Calendar dateTime = Calendar.getInstance();
+    DateFormat formatDateTime = DateFormat.getDateTimeInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
         etDatePicker = (TextView) findViewById(R.id.etDatePicker);
-        tvCreateTags = (TextView) findViewById(R.id.tvCreateTags);
         etDescription = (EditText) findViewById(R.id.etDescription);
         etAmount = (EditText) findViewById(R.id.etAmount);
-        // etTagName = (EditText) findViewById(R.id.etTagName);
         etStatus = (EditText) findViewById(R.id.etStatus);
         etMemo = (EditText) findViewById(R.id.etMemo);
         spCategory = (Spinner) findViewById(R.id.spCategory);
         spTags = (Spinner) findViewById(R.id.spTags);
+        btnCreateTags = (Button) findViewById(R.id.btnCreateTags);
         btnSaveTransaction = (Button) findViewById(R.id.btnSaveTransaction);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -233,11 +231,9 @@ public class AddTransactionActivity extends AppCompatActivity {
                 updateDate();
             }
         });
-        tvCreateTags.setOnClickListener(new View.OnClickListener() {
+        btnCreateTags.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Intent intent = new Intent(getApplicationContext(), AddTagsActivity.class);
                 startActivity(intent);
             }
@@ -248,7 +244,6 @@ public class AddTransactionActivity extends AppCompatActivity {
         btnSaveTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // ticket_time_in = Calendar.getInstance().getTimeInMillis();
                 String string_date = etDatePicker.getText().toString();
                 SimpleDateFormat f = new SimpleDateFormat("MMM dd,yyyy hh:mm:ss a");
                 Date date = null;
@@ -326,17 +321,12 @@ public class AddTransactionActivity extends AppCompatActivity {
     public void showAllTags() {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<addTags> queryAllTags = realm.where(addTags.class);
-//        queryAllTags.equalTo("type", "Expense");
+        tagsCategory.add("default");
         RealmResults<addTags> manyAddTags = queryAllTags.findAll();
         for (addTags addTags : manyAddTags) {
-            //  Log.d("NavigationDrawer", "onCreate: " + addTags.getTagName());
             tagsCategory.add(addTags.getTagName());
 
         }
-
-//        category.add("Income");
-//        category.add("Budget");
-//        category.add("Expense");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tagsCategory);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spTags.setAdapter(dataAdapter);
@@ -344,7 +334,6 @@ public class AddTransactionActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View view, int arg2, long arg3) {
                 addTagsToTransactionTable = String.valueOf(spTags.getSelectedItem());
-                //Toast.makeText(getApplicationContext(), showCategory, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -363,10 +352,4 @@ public class AddTransactionActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onResume() {
-
-        super.onResume();
-        //showAllTags();
-    }
 }

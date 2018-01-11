@@ -16,6 +16,7 @@
 
         android:layout_width="81dp"
         android:layout_height="81dp"
+        android:layout_marginLeft="25dp"
         android:background="@drawable/footerarea" />
 
     <!--<TextView-->

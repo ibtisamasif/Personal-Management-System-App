@@ -29,10 +29,12 @@ public class TagsAdapter extends RealmRecyclerViewAdapter<addTags> {
     private Realm realm;
     private LayoutInflater inflater;
     private String showCategory;
+
     public TagsAdapter(Context context) {
 
         this.context = context;
     }
+
     // create new views (invoked by the layout manager)
     @Override
     public TagsAdapter.CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -160,7 +162,6 @@ public class TagsAdapter extends RealmRecyclerViewAdapter<addTags> {
             card = (CardView) itemView.findViewById(R.id.card);
 
             tvIncomeTagName = (TextView) itemView.findViewById(R.id.tvIncomeTagName);
-
 
 
         }

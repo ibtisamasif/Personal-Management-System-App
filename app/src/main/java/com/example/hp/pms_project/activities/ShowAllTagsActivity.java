@@ -1,5 +1,6 @@
 package com.example.hp.pms_project.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.hp.pms_project.R;
+import com.example.hp.pms_project.adapter.IncExpBudAdapter;
 import com.example.hp.pms_project.adapter.RealmTransactionsAdapter;
 import com.example.hp.pms_project.adapter.TransactionsAdapter;
 import com.example.hp.pms_project.model.transactionTable;
@@ -27,26 +29,23 @@ import io.realm.RealmResults;
 
 public class ShowAllTagsActivity extends AppCompatActivity {
 
-//    private Button btnIncome;
-//    private Button btnBudget;
-//    private Button btnExpense;
-   private Button btnAll;
-    private TransactionsAdapter adapter;
+    private Button btnIncome;
+    private Button btnBudget;
+    private Button btnExpense;
+    private Button btnAll;
+    private IncExpBudAdapter adapter;
     private RecyclerView recycler;
-    private LayoutInflater inflater;
     private Realm realm;
-    // private Button btnADayAgo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_tags);
         recycler = (RecyclerView) findViewById(R.id.recycler);
-//        btnIncome = (Button) findViewById(R.id.btnIncome);
-//        btnBudget = (Button) findViewById(R.id.btnBudget);
-//        btnExpense = (Button) findViewById(R.id.btnExpense);
-       // btnADayAgo = (Button) findViewById(R.id.btnADayAgo);
-        btnAll = (Button) findViewById(R.id.btnAll);
+        btnIncome = (Button) findViewById(R.id.btnIncome);
+        btnBudget = (Button) findViewById(R.id.btnBudget);
+        btnExpense = (Button) findViewById(R.id.btnExpense);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -63,45 +62,34 @@ public class ShowAllTagsActivity extends AppCompatActivity {
         RealmController.with(this).refresh();
         setRealmAdapter(RealmController.with(this).getTransactions());
         Log.d("ShowAllTagsActivity", "onClick: getTransactionsIncome " + RealmController.with(getApplication()).getTransactions());
-//
-//        btnIncome.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                RealmController.with(getApplication()).refresh();
-//                setRealmAdapter(RealmController.with(getApplication()).getTransactionsIncome());
-//                Log.d("ShowAllTagsActivity", "onClick: getTransactionsIncome " + RealmController.with(getApplication()).getTransactionsIncome());
-//            }
-//        });
-//        btnBudget.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                RealmController.with(getApplication()).refresh();
-//                setRealmAdapter(RealmController.with(getApplication()).getTransactionsBudegt());
-//                Log.d("ShowAllTagsActivity", "onClick: getTransactionsBudegt " + RealmController.with(getApplication()).getTransactionsBudegt());
-//
-//            }
-//        });
-//        btnExpense.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                RealmController.with(getApplication()).refresh();
-//                setRealmAdapter(RealmController.with(getApplication()).getTransactionsExpance());
-//                Log.d("ShowAllTagsActivity", "onClick: getTransactionsExpance " + RealmController.with(getApplication()).getTransactionsExpance());
-//
-//
-//            }
-//        });
-        btnAll.setOnClickListener(new View.OnClickListener() {
+
+        btnIncome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RealmController.with(getApplication()).refresh();
-                setRealmAdapter(RealmController.with(getApplication()).getTransactions());
+                setRealmAdapter(RealmController.with(getApplication()).getTransactionsIncome());
+                Log.d("ShowAllTagsActivity", "onClick: getTransactionsIncome " + RealmController.with(getApplication()).getTransactionsIncome());
             }
         });
+        btnBudget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RealmController.with(getApplication()).refresh();
+                setRealmAdapter(RealmController.with(getApplication()).getTransactionsBudegt());
+                Log.d("ShowAllTagsActivity", "onClick: getTransactionsBudegt " + RealmController.with(getApplication()).getTransactionsBudegt());
+
+            }
+        });
+        btnExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RealmController.with(getApplication()).refresh();
+                setRealmAdapter(RealmController.with(getApplication()).getTransactionsExpance());
+                Log.d("ShowAllTagsActivity", "onClick: getTransactionsExpance " + RealmController.with(getApplication()).getTransactionsExpance());
 
 
-        //Toast.makeText(this, "Press card item for edit, long press to remove item", Toast.LENGTH_LONG).show();
-
+            }
+        });
     }
 
     public void setRealmAdapter(RealmResults<transactionTable> transactions) {
@@ -122,7 +110,7 @@ public class ShowAllTagsActivity extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycler.setLayoutManager(layoutManager);
         // create an empty adapter and add it to the recycler view
-        adapter = new TransactionsAdapter(this);
+        adapter = new IncExpBudAdapter(this);
         recycler.setAdapter(adapter);
 
         RealmController.with(this).refresh();
@@ -131,7 +119,7 @@ public class ShowAllTagsActivity extends AppCompatActivity {
 
     private void setRealmData() {
         ArrayList<transactionTable> transactionsArrayList = new ArrayList<>();
-        for (com.example.hp.pms_project.model.transactionTable t : transactionsArrayList) {
+        for (transactionTable t : transactionsArrayList) {
             // Persist your data easily
             realm.beginTransaction();
             realm.copyToRealm(t);

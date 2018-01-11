@@ -3,11 +3,16 @@ package com.example.hp.pms_project.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +22,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hp.pms_project.R;
+import com.example.hp.pms_project.adapter.RealmTransactionsAdapter;
+import com.example.hp.pms_project.adapter.TransactionsAdapter;
 import com.example.hp.pms_project.model.transactionTable;
+import com.example.hp.pms_project.realm.RealmController;
+import com.example.hp.pms_project.utils.Prefs;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -37,12 +46,12 @@ import io.realm.RealmResults;
 
 public class NavigationDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     long lnAmountExpance;
-    long lnAmountBudget;
+    private Realm realm;
     long lnAmountIncome;
+    private TransactionsAdapter adapter;
+    private RecyclerView recycler;
     private TextView tvTotalIncome;
-    private TextView tvTotalBudget;
     private TextView tvTotalExpance;
-    private PieChart pieChart;
     private long sum;
     private long sumBudget;
     private long sumExpance;
@@ -53,25 +62,33 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        Button btnRegister = (Button) findViewById(R.id.btnRegister);
+        recycler = (RecyclerView) findViewById(R.id.recycler);
         tvTotalIncome = (TextView) findViewById(R.id.tvTotalIncome);
-        tvTotalBudget = (TextView) findViewById(R.id.tvTotalBudget);
         tvTotalExpance = (TextView) findViewById(R.id.tvTotalExpance);
-        pieChart = (PieChart) findViewById(R.id.piechart);
         setSupportActionBar(toolbar);
         sum = 0;
         sumBudget = 0;
         sumExpance = 0;
+        this.realm = RealmController.with(this).getRealm();
+        setupRecycler();
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        if (!Prefs.with(this).getPreLoad()) {
+            setRealmData();
+        }
+        // refresh the realm instance
+        RealmController.with(this).refresh();
+        setRealmAdapter(RealmController.with(this).getTransactions());
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
                 startActivity(intent);
 
             }
         });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -84,6 +101,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     @Override
     protected void onResume() {
         super.onResume();
+        setRealmAdapter(RealmController.with(this).getTransactions());
         sum = 0;
         sumBudget = 0;
         sumExpance = 0;
@@ -96,16 +114,8 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             sum = sum + lnAmountIncome;
 
         }
-        tvTotalIncome.setText(sum + "");
-        RealmQuery<transactionTable> querybudget = realm.where(transactionTable.class);
-        querybudget.equalTo("type", "Budget");
-        RealmResults<transactionTable> manyBudget = querybudget.findAll();
-        for (com.example.hp.pms_project.model.transactionTable transactionTable : manyBudget) {
-            lnAmountBudget = transactionTable.getAmount();
-            sumBudget = sumBudget + lnAmountBudget;
+        tvTotalIncome.setText("+" + sum + "");
 
-        }
-        tvTotalBudget.setText(sumBudget + "");
         RealmQuery<transactionTable> queryExpance = realm.where(transactionTable.class);
         queryExpance.equalTo("type", "Expense");
         RealmResults<transactionTable> manyExpance = queryExpance.findAll();
@@ -114,33 +124,9 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             sumExpance = sumExpance + lnAmountExpance;
 
         }
-        tvTotalExpance.setText(sumExpance + "");
+        tvTotalExpance.setText("-" + sumExpance + "");
         realm.close();
-        float f = Float.parseFloat(String.valueOf(sum));
-        float f2 = Float.parseFloat(String.valueOf(sumExpance));
-        float f1 = Float.parseFloat(String.valueOf(sumBudget));
-        sum1 = 0;
-        Toast.makeText(this, "" + sum + "  " + sumBudget + "  " + sumExpance + " f " + f, Toast.LENGTH_SHORT).show();
-        pieChart.setUsePercentValues(false);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-        pieChart.setDragDecelerationFrictionCoef(0.99f);
-        pieChart.setDrawHoleEnabled(false);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setTransparentCircleRadius(61f);
-        ArrayList<PieEntry> yValues = new ArrayList<>();
-        sum1 = f1 - f2;
-        yValues.add(new PieEntry(f2, "Expense"));
-        yValues.add(new PieEntry(sum1, "Budget Remaining"));
-        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
-        PieDataSet dataSet = new PieDataSet(yValues, "Status");
-        dataSet.setSliceSpace(1f);
-        dataSet.setSelectionShift(2f);
-        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
-        PieData data = new PieData((dataSet));
-        data.setValueTextSize(10f);
-        data.setValueTextColor(Color.YELLOW);
-        pieChart.setData(data);
+
     }
 
     @Override
@@ -160,16 +146,41 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
+    public void setRealmAdapter(RealmResults<transactionTable> transactions) {
 
-        return super.onOptionsItemSelected(item);
+        RealmTransactionsAdapter realmAdapter = new RealmTransactionsAdapter(this.getApplicationContext(), transactions, true);
+        // Set the data and tell the RecyclerView to draw
+        adapter.setRealmAdapter(realmAdapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void setupRecycler() {
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recycler.setHasFixedSize(true);
+        recycler.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
+        // use a linear layout manager since the cards are vertically scrollable
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recycler.setLayoutManager(layoutManager);
+        // create an empty adapter and add it to the recycler view
+        adapter = new TransactionsAdapter(this);
+        recycler.setAdapter(adapter);
+
+        RealmController.with(this).refresh();
+        setRealmAdapter(RealmController.with(this).getSort());
+    }
+
+    private void setRealmData() {
+        ArrayList<transactionTable> transactionsArrayList = new ArrayList<>();
+        for (com.example.hp.pms_project.model.transactionTable t : transactionsArrayList) {
+            // Persist your data easily
+            realm.beginTransaction();
+            realm.copyToRealm(t);
+            realm.commitTransaction();
+        }
+        Prefs.with(this).setPreLoad(true);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

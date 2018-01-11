@@ -5,14 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hp.pms_project.R;
+import com.example.hp.pms_project.adapter.IncExpBudAdapter;
 import com.example.hp.pms_project.adapter.RealmTransactionsAdapter;
 import com.example.hp.pms_project.adapter.TransactionsAdapter;
 import com.example.hp.pms_project.model.addTags;
@@ -30,10 +34,10 @@ public class SelectTagsTotalActivity extends AppCompatActivity {
     public ArrayList<String> tagsCategory;
     Spinner spTags;
     private String addTagsToTransactionTable = "";
-    private TransactionsAdapter adapter;
+    private IncExpBudAdapter adapter;
     private RecyclerView recycler;
-    private LayoutInflater inflater;
     private Realm realm;
+    private TextView tvSumTags;
 
 
     @Override
@@ -41,6 +45,13 @@ public class SelectTagsTotalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_tags_total);
         recycler = (RecyclerView) findViewById(R.id.recycler);
+        tvSumTags = (TextView) findViewById(R.id.tvSumTags);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         spTags = (Spinner) findViewById(R.id.spTags);
         tagsCategory = new ArrayList<String>();
@@ -54,8 +65,6 @@ public class SelectTagsTotalActivity extends AppCompatActivity {
         }
         // refresh the realm instance
         RealmController.with(this).refresh();
-
-        // addTagsToTransactionTable
 
     }
 
@@ -78,7 +87,7 @@ public class SelectTagsTotalActivity extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycler.setLayoutManager(layoutManager);
         // create an empty adapter and add it to the recycler view
-        adapter = new TransactionsAdapter(this);
+        adapter = new IncExpBudAdapter(this);
         recycler.setAdapter(adapter);
         RealmController.with(this).refresh();
         setRealmAdapter(RealmController.with(this).getSort());
@@ -98,6 +107,7 @@ public class SelectTagsTotalActivity extends AppCompatActivity {
 
     public void showAllTags() {
         Realm realm = Realm.getDefaultInstance();
+        tagsCategory.add("default");
         RealmQuery<addTags> queryAllTags = realm.where(addTags.class);
 //        queryAllTags.equalTo("type", "Expense");
         RealmResults<addTags> manyAddTags = queryAllTags.findAll();
@@ -106,10 +116,6 @@ public class SelectTagsTotalActivity extends AppCompatActivity {
             tagsCategory.add(addTags.getTagName());
 
         }
-
-//        category.add("Income");
-//        category.add("Budget");
-//        category.add("Expense");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tagsCategory);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spTags.setAdapter(dataAdapter);
@@ -118,6 +124,17 @@ public class SelectTagsTotalActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> arg0, View view, int arg2, long arg3) {
                 addTagsToTransactionTable = String.valueOf(spTags.getSelectedItem());
                 setRealmAdapter(RealmController.with(getApplication()).getTransactionsTages(addTagsToTransactionTable));
+                long sum = 0;
+                Realm realm = Realm.getDefaultInstance();
+                RealmQuery<transactionTable> queryExpance = realm.where(transactionTable.class);
+                queryExpance.equalTo("tagName", addTagsToTransactionTable);
+                RealmResults<transactionTable> manyExpance = queryExpance.findAll();
+                for (transactionTable transactionTable : manyExpance) {
+                    sum = sum + transactionTable.getAmount();
+
+                }
+                tvSumTags.setText(" " + sum + " ");
+                realm.close();
                 Toast.makeText(getApplicationContext(), addTagsToTransactionTable, Toast.LENGTH_SHORT).show();
             }
 
@@ -127,5 +144,14 @@ public class SelectTagsTotalActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
