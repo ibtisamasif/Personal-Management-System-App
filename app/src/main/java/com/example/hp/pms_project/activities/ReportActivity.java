@@ -1,18 +1,30 @@
 package com.example.hp.pms_project.activities;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hp.pms_project.R;
+import com.example.hp.pms_project.adapter.IncExpBudAdapter;
+import com.example.hp.pms_project.adapter.RealmTransactionsAdapter;
 import com.example.hp.pms_project.model.transactionTable;
+import com.example.hp.pms_project.realm.RealmController;
+import com.example.hp.pms_project.utils.Prefs;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -28,6 +40,8 @@ import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
+import static android.graphics.Color.*;
+
 public class ReportActivity extends AppCompatActivity {
 
     private TextView tvTotalIncome;
@@ -36,6 +50,8 @@ public class ReportActivity extends AppCompatActivity {
     private Button btnLastWeek;
     private Button btnLast15Days;
     private PieChart pieChart;
+    private IncExpBudAdapter adapter;
+    private RecyclerView recycler;
     private long sum;
     private long sumBudget;
     private long sumExpance;
@@ -43,8 +59,12 @@ public class ReportActivity extends AppCompatActivity {
     long lnAmountBudget;
     float sum1 = 0;
     long lnAmountIncome;
+    private Realm realm;
     boolean check = false;
     private Button btnMonth;
+    private Spinner spType;
+    public ArrayList<String> category;
+    private String showCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +74,40 @@ public class ReportActivity extends AppCompatActivity {
         tvTotalBudget = (TextView) findViewById(R.id.tvTotalBudget);
         tvTotalExpance = (TextView) findViewById(R.id.tvTotalExpance);
         btnLastWeek = (Button) findViewById(R.id.btnLastWeek);
+        recycler = (RecyclerView) findViewById(R.id.recycler);
         btnLast15Days = (Button) findViewById(R.id.btnLast15Days);
         btnMonth = (Button) findViewById(R.id.btnMonth);
         pieChart = (PieChart) findViewById(R.id.piechart);
+        spType = (Spinner) findViewById(R.id.spType);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        category = new ArrayList<String>();
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        showAllCategoriesInSpinner();
+
+        this.realm = RealmController.with(this).getRealm();
+        setupRecycler();
+
+        if (!Prefs.with(this).getPreLoad()) {
+            setRealmData();
+        }
+        // refresh the realm instance
+        RealmController.with(this).refresh();
+        btnLastWeek.setBackgroundColor(btnLastWeek.getContext().getResources().getColor(R.color.red));
+        setRealmAdapter(RealmController.with(getApplication()).getTransactionsLastWeek());
+        update();
         btnLastWeek.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
+                btnLastWeek.setBackgroundColor(btnLastWeek.getContext().getResources().getColor(R.color.red));
+                btnLast15Days.setBackgroundColor(btnLast15Days.getContext().getResources().getColor(R.color.gray));
+                btnMonth.setBackgroundColor(btnMonth.getContext().getResources().getColor(R.color.gray));
+
+                setRealmAdapter(RealmController.with(getApplication()).getTransactionsLastWeek());
                 update();
             }
         });
@@ -73,6 +115,10 @@ public class ReportActivity extends AppCompatActivity {
         btnLast15Days.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnLastWeek.setBackgroundColor(btnLastWeek.getContext().getResources().getColor(R.color.gray));
+                btnLast15Days.setBackgroundColor(btnLast15Days.getContext().getResources().getColor(R.color.red));
+                btnMonth.setBackgroundColor(btnMonth.getContext().getResources().getColor(R.color.gray));
+                setRealmAdapter(RealmController.with(getApplication()).getTransactionsLast15Day());
                 update15DDaysAgo();
             }
         });
@@ -80,7 +126,10 @@ public class ReportActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                btnLastWeek.setBackgroundColor(btnLastWeek.getContext().getResources().getColor(R.color.gray));
+                btnLast15Days.setBackgroundColor(btnLast15Days.getContext().getResources().getColor(R.color.gray));
+                btnMonth.setBackgroundColor(btnMonth.getContext().getResources().getColor(R.color.red));
+                setRealmAdapter(RealmController.with(getApplication()).getTransactionsLastMonth());
                 updateLastMonth();
             }
         });
@@ -89,9 +138,47 @@ public class ReportActivity extends AppCompatActivity {
         pieChart.setExtraOffsets(5, 10, 5, 5);
         pieChart.setDragDecelerationFrictionCoef(0.99f);
         pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setHoleColor(WHITE);
         pieChart.setTransparentCircleRadius(61f);
     }
+
+
+    public void setRealmAdapter(RealmResults<transactionTable> transactions) {
+
+        RealmTransactionsAdapter realmAdapter = new RealmTransactionsAdapter(this.getApplicationContext(), transactions, true);
+        // Set the data and tell the RecyclerView to draw
+        adapter.setRealmAdapter(realmAdapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void setupRecycler() {
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recycler.setHasFixedSize(true);
+        recycler.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
+        // use a linear layout manager since the cards are vertically scrollable
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recycler.setLayoutManager(layoutManager);
+        // create an empty adapter and add it to the recycler view
+        adapter = new IncExpBudAdapter(this);
+        recycler.setAdapter(adapter);
+
+        RealmController.with(this).refresh();
+        setRealmAdapter(RealmController.with(this).getSort());
+    }
+
+    private void setRealmData() {
+        ArrayList<transactionTable> transactionsArrayList = new ArrayList<>();
+        for (transactionTable t : transactionsArrayList) {
+            // Persist your data easily
+            realm.beginTransaction();
+            realm.copyToRealm(t);
+            realm.commitTransaction();
+        }
+        Prefs.with(this).setPreLoad(true);
+    }
+
 
     private void updateLastMonth() {
         sum = 0;
@@ -148,7 +235,7 @@ public class ReportActivity extends AppCompatActivity {
         dataSet.setColors(ColorTemplate.PASTEL_COLORS);
         PieData data = new PieData((dataSet));
         data.setValueTextSize(10f);
-        data.setValueTextColor(Color.YELLOW);
+        data.setValueTextColor(YELLOW);
         pieChart.setData(data);
     }
 
@@ -209,7 +296,7 @@ public class ReportActivity extends AppCompatActivity {
         dataSet.setColors(ColorTemplate.PASTEL_COLORS);
         PieData data = new PieData((dataSet));
         data.setValueTextSize(10f);
-        data.setValueTextColor(Color.YELLOW);
+        data.setValueTextColor(YELLOW);
         pieChart.setData(data);
     }
 
@@ -266,7 +353,7 @@ public class ReportActivity extends AppCompatActivity {
         dataSet.setColors(ColorTemplate.PASTEL_COLORS);
         PieData data = new PieData((dataSet));
         data.setValueTextSize(10f);
-        data.setValueTextColor(Color.YELLOW);
+        data.setValueTextColor(YELLOW);
         pieChart.setData(data);
     }
 
@@ -276,6 +363,27 @@ public class ReportActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void showAllCategoriesInSpinner() {
+        category.add("Income");
+        category.add("Budget");
+        category.add("Expense");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, category);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spType.setAdapter(dataAdapter);
+        spType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View view, int arg2, long arg3) {
+                showCategory = String.valueOf(spType.getSelectedItem());
+               // Toast.makeText(getApplicationContext(), spType, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
     }
 
 }

@@ -225,12 +225,12 @@ public class AddTransactionActivity extends AppCompatActivity {
         }
         category = new ArrayList<String>();
         tagsCategory = new ArrayList<String>();
-//        etDatePicker.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                updateDate();
-//            }
-//        });
+        etDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateDate();
+            }
+        });
         btnCreateTags.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -244,16 +244,16 @@ public class AddTransactionActivity extends AppCompatActivity {
         btnSaveTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String string_date = etDatePicker.getText().toString();
-//                SimpleDateFormat f = new SimpleDateFormat("MMM dd,yyyy hh:mm:ss a");
-//                Date date = null;
-//                try {
-//                    date = f.parse(string_date);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                final long milliseconds = date.getTime();
-//                Log.d("milliseconds ", "onClick: " + milliseconds);
+                String string_date = etDatePicker.getText().toString();
+                SimpleDateFormat f = new SimpleDateFormat("MMM dd,yyyy hh:mm:ss a");
+                Date date = null;
+                try {
+                    date = f.parse(string_date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                final long milliseconds = date.getTime();
+                Log.d("milliseconds ", "onClick: " + milliseconds);
                 Realm realm = Realm.getDefaultInstance();
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
@@ -262,7 +262,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                         transactionTable.setId(System.currentTimeMillis());
                         transactionTable.setType(showCategory);
                         transactionTable.setDescription(etDescription.getText().toString());
-                        transactionTable.setDate(Calendar.getInstance().getTimeInMillis());
+                        transactionTable.setDate(milliseconds);
                         transactionTable.setAmount(Long.parseLong(etAmount.getText().toString()));
                         transactionTable.setTagId(System.currentTimeMillis());
                         transactionTable.setTagName(addTagsToTransactionTable + "");
