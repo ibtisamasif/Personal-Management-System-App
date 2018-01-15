@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import com.example.hp.pms_project.model.addTags;
 import com.example.hp.pms_project.model.transactionTable;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -128,6 +131,17 @@ public class RealmController {
         long cuurentTime = System.currentTimeMillis();
         long LastWeek = cuurentTime - 604800000;
         return realm.where(transactionTable.class).greaterThan("date", LastWeek).findAll();
+        //return realm.where(transactionTable.class).equalTo("type","Income").findAll();
+    }
+
+    public RealmResults<transactionTable> getTransactionsLastMonth() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date result = cal.getTime();
+
+long month=result.getTime();
+
+        return realm.where(transactionTable.class).greaterThan("date", month).findAll();
         //return realm.where(transactionTable.class).equalTo("type","Income").findAll();
     }
 

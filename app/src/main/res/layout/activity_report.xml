@@ -59,15 +59,15 @@
             android:text="LAst 15 days"
             android:textColor="#fff" />
 
-        <!--<Button-->
-            <!--android:id="@+id/btnMonth"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="2dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="#405594"-->
-            <!--android:text="Last month"-->
-            <!--android:textColor="#fff" />-->
+        <Button
+            android:id="@+id/btnMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_xml_btn_yellow"
+            android:text="Last month"
+            android:textColor="#fff" />
 
 
     </LinearLayout>

@@ -161,6 +161,11 @@ public class ShowAllTagsActivity extends AppCompatActivity {
 
             setRealmAdapter(RealmController.with(getApplication()).getTransactionsLastWeek());
         }
+        if (id == R.id.action_last_month) {
+            RealmController.with(getApplication()).refresh();
+
+            setRealmAdapter(RealmController.with(getApplication()).getTransactionsLastMonth());
+        }
 
         if (item.getItemId() == android.R.id.home) {
             finish(); // close this activity and return to preview activity (if there is any)

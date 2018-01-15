@@ -62,6 +62,8 @@ public class AllGraphsActivity extends AppCompatActivity {
         }
         sum = 0;
         sumBudget = 0;
+
+
         sumExpance = 0;
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<transactionTable> query = realm.where(transactionTable.class);

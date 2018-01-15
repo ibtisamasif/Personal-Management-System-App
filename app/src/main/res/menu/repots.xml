@@ -16,4 +16,9 @@
         android:orderInCategory="100"
         android:title="Last 15 days ago"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_last-month"
+        android:orderInCategory="100"
+        android:title="Last Month"
+        app:showAsAction="never" />
 </menu>
