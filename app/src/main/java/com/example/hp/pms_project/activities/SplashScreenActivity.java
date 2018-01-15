@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.hp.pms_project.R;
 
-public class SplashScreenActivity extends AppCompatActivity {//
+public class SplashScreenActivity extends AppCompatActivity {
     private final int SPLASH_DISPLAY_LENGTH = 3000;
 
     @Override
