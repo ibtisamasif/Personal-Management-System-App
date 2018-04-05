@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 
 android {
-    compileSdkVersion 26//t
+    compileSdkVersion 26
     defaultConfig {
         applicationId "com.codextech.pms"
         minSdkVersion 15
