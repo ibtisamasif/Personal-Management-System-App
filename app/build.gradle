@@ -4,7 +4,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.hp.pms_project"
+        applicationId "com.codextech.pms"
         minSdkVersion 15
         targetSdkVersion 19
         versionCode 1
